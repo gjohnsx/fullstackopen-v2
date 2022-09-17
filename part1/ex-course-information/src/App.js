@@ -10,11 +10,12 @@ const App = () => {
       {part: 'Using props to pass data', exercises: 7},
       {part: 'State of a component', exercises: 14},
     ],
+    totalEx: function() {
+      return this.parts.reduce((acc, cur) => {
+        return acc += cur.exercises;
+      }, 0);
+    },
   };
-
-  const totalExercises = course.parts.reduce((acc, cur) => {
-    return acc += cur.exercises;
-  }, 0);
 
   return (
     <div>
@@ -25,7 +26,7 @@ const App = () => {
         )
       })}
 
-      <Total totalExercises={totalExercises} />
+      <Total totalExercises={course.totalEx()} />
     </div>
 
   )
