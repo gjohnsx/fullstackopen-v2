@@ -1,7 +1,7 @@
 const Stats = ({ good, neutral, bad }) => {
     const total = good + neutral + bad;
     const average = total > 0 
-        ? ((good - bad) / total) * 100 + '%'
+        ? ((good - bad) / total).toFixed(2)
         : 'No feedback'
     
     return (
@@ -14,7 +14,7 @@ const Stats = ({ good, neutral, bad }) => {
                     </div>
                     <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
                         <dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">Positive</dt>
-                        <dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">{total > 0 ? (good / total) * 100 + '%' : 'No feedback'}</dd>
+                        <dd className="order-1 text-5xl font-bold tracking-tight text-indigo-600">{total > 0 ? ((good / total) * 100).toFixed(2) + '%' : 'No feedback'}</dd>
                     </div>
                 </dl>
             </div>

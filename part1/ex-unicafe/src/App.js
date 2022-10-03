@@ -1,13 +1,7 @@
 import { useState } from 'react'
+import Button from './components/Button';
 import Stats from './components/Stats';
 
-const Button = ({ handleClick, text }) => {
-  return (
-    <button onClick={handleClick} className='px-3 py-1 rounded bg-white text-indigo-600 text-lg hover:bg-gray-200'>
-      {text}
-    </button>
-  )
-};
 
 const App = () => {
   const [good, setGood] = useState(0);
@@ -26,7 +20,8 @@ const App = () => {
 
       <Stats good={good} neutral={neutral} bad={bad} />
 
-      <div className="mt-8 flex flex-col">
+      {(good !== 0 || neutral !== 0 || bad !== 0) && (
+        <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -79,6 +74,7 @@ const App = () => {
           </div>
         </div>
       </div>
+      )}
 
     </div>
   )
