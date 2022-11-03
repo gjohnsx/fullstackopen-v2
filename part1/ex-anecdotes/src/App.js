@@ -14,34 +14,48 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
   
-  // console.log(votes);
+  const maxVotes = Math.max(...votes)
+  const maxVotesIndex = votes.findIndex(n => n === maxVotes)
+
+  console.log('votes =', maxVotes)
+  console.log('index =', maxVotesIndex)
+
+  
+  console.log(votes);
+  console.log(votes.findIndex(n => n === Math.max(...votes)))
 
   return (
     <div className="p-6">
-      <div>
-        <button 
-          onClick={() => setSelected(prevSelected => Math.floor(Math.random() * anecdotes.length))}
-          className="border rounded bg-green-500 text-white px-3 py-1 hover:bg-green-600 focus:ring-green-700"
+      <button 
+        onClick={() => setSelected(prevSelected => Math.floor(Math.random() * anecdotes.length))}
+        className="border rounded bg-green-500 text-white px-3 py-1 hover:bg-green-600 focus:ring-green-700"
+      >
+        Random Anecdote
+      </button>
+      
+      <h2 className="font-bold text-3xl">Anecdote of the day</h2>
+
+      <div className="flex flex-col">
+        <h3 className="my-2">{anecdotes[selected]}</h3>
+        <span className="">{votes[selected]} votes</span>
+        <button
+          className="border bg-gray-400 hover:bg-gray-500 px-2 py-px rounded w-1/12"  
+          onClick={() => setVotes(prevVotes => {
+            const votesCopy = [...prevVotes];
+            votesCopy[selected] += 1;
+            return votesCopy
+          })}
         >
-          Random Anecdote
+          Upvote
         </button>
       </div>
       
-      <div className="">
-        <h3 className="my-2">{anecdotes[selected]}</h3>
-        <span className="">{votes[selected]} votes</span>
-      </div>
-      <button
-        className="border bg-gray-400 hover:bg-gray-500 px-2 py-px rounded"  
-        onClick={() => setVotes(prevVotes => {
-          const votesCopy = [...prevVotes];
-          votesCopy[selected] += 1;
-          return votesCopy
-        })}
-      >
-        Upvote
-      </button>
       
+      <h2 className="font-bold text-3xl">Anecdote with the most votes</h2>
+      <div className="flex flex-col">
+        <h3 className="my-2">{anecdotes[maxVotesIndex]}</h3>
+        <span className="">{maxVotes} votes</span>
+      </div>
     </div>
   )
 }
